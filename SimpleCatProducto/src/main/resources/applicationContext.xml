@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.comunidad.simplecatproducto" />
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="classpath:jdbc.properties"/>
+          
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="${dataSource.URL}" />
+        <property name="username" value="${dataSource.user}" />
+        <property name="password" value="${dataSource.password}" />
+    </bean>
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource" />
+        
+    <bean id="DepartamentoService" class="com.comunidad.simplecatproducto.catalogos.departamentos.service.DepartamentoServiceImpl">
+        <property name="departamentoDao" ref="DepartamentoDao" />
+    </bean>
+    
+    <bean id="CategoriaService" class="com.comunidad.simplecatproducto.catalogos.categorias.service.CategoriaServiceImpl">
+        <property name="categoriaDao" ref="CategoriaDao" />
+    </bean>
+    
+    <bean id="ProductoService" class="com.comunidad.simplecatproducto.catalogos.productos.service.ProductoServiceImpl">
+        <property name="productoDao" ref="ProductoDao" />
+    </bean>
+    
+    <bean id="SubproductoService" class="com.comunidad.simplecatproducto.catalogos.subproductos.service.SubproductoServiceImpl">
+        <property name="subproductoDao" ref="SubproductoDao" />
+        <property name="detalleSubprodDao" ref="DetalleSubprodDao" />
+    </bean>	
+    
+    <bean id="DetalleSubprodService" class="com.comunidad.simplecatproducto.catalogos.subproductos.service.DetalleSubprodServiceImpl">
+        <property name="detalleSubprodDao" ref="DetalleSubprodDao" />
+    </bean>
+</beans>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+    <bean id="DepartamentoDao"
+          class="com.comunidad.simplecatproducto.catalogos.departamentos.dao.DepartamentoDaoImpl">
+        <property name="dataSource" ref="dataSource" />
+        <property name="qryCrear">
+            <value>
+                <![CDATA[
+                    INSERT INTO CAT_PROD.CATDEPART (ID, NOMBRE, DESCR, FOTO, PATH, STATUS_FLAG, 
+                    EXPIRY_DT, LAST_UPDATE_DT, START_DATE, LAST_UPDATE_USER, DEL_LOGIC)
+                    VALUES (?,?,?,?,?,?,?,?,?,?,?)
+                ]]>
+            </value>
+        </property>
+        <property name="qryModificar">
+            <value>
+                <![CDATA[
+                    UPDATE CAT_PROD.CATDEPART  SET 
+                    NOMBRE=?, DESCR=?, FOTO=?, PATH=?, STATUS_FLAG=?, EXPIRY_DT=?, 
+                    LAST_UPDATE_DT=? , LAST_UPDATE_USER=?
+                    WHERE ID=?
+                ]]>
+            </value>
+        </property>
+        <property name="qryBorrar">
+            <value>
+                <![CDATA[
+                    UPDATE CAT_PROD.CATDEPART SET DEL_LOGIC=?
+                    WHERE ID=?
+                ]]>
+            </value>
+        </property>
+        <property name="qryTodo">
+            <bean
+                class="com.comunidad.simplecatproducto.jdbc.JdbcQueryParameters">
+                <property name="sqlBase">
+                    <value>
+                        <![CDATA[	
+                            SELECT
+                            ID, NOMBRE, DESCR, FOTO, PATH, STATUS_FLAG,
+                            EXPIRY_DT, LAST_UPDATE_DT, START_DATE, 
+                            LAST_UPDATE_USER, DEL_LOGIC
+                            FROM CAT_PROD.CATDEPART
+                            WHERE 1 = 1
+                        ]]>
+                    </value>
+                </property>
+                <property name="optionalParameters">
+                    <props>
+                        <prop key="id">AND ID=?</prop>
+                        <prop key="estatus">AND STATUS_FLAG=?</prop>
+                    </props>
+                </property>
+                <property name="sqlLast">
+                    <value>
+                    </value>
+                </property>
+            </bean>
+        </property>
+        <property name="nextId">
+            <value>
+                <![CDATA[
+                    SELECT MAX(ID) + 1 FROM CAT_PROD.CATDEPART
+                ]]>
+            </value>
+        </property>
+        <property name="existe">
+            <value>
+                <![CDATA[
+                    SELECT COUNT(*) FROM CAT_PROD.CATDEPART WHERE ID=?
+                ]]>
+            </value>
+        </property>
+        <property name="qryCatCatego">
+            <value>
+                <![CDATA[
+                    SELECT ID, NOMBRE FROM CAT_PROD.CATDEPART ORDER BY ID ASC
+                ]]>
+            </value>
+        </property>
+    </bean>
+</beans>

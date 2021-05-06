@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+    <bean id="SubproductoDao"
+          class="com.comunidad.simplecatproducto.catalogos.subproductos.dao.SubproductoDaoImpl">
+        <property name="dataSource" ref="dataSource" />
+        <property name="qryCrear">
+            <value>
+                <![CDATA[
+                    INSERT INTO CAT_PROD.CATSUBPROD (ID, ID_PROD, NOMBRE, DESCR, FOTO, PATH, 
+                    STATUS_FLAG, EXPIRY_DT, LAST_UPDATE_DT, LAST_UPDATE_USER)
+                    VALUES (?,?,?,?,?,?,?,?,?,?)
+                ]]>
+            </value>
+        </property>
+        <property name="qryModificar">
+            <value>
+                <![CDATA[
+                    UPDATE CAT_PROD.CATSUBPROD  SET 
+                    ID_PROD=?, NOMBRE=?, DESCR=?, FOTO=?, PATH=?, STATUS_FLAG=?, EXPIRY_DT=?, LAST_UPDATE_DT=? , LAST_UPDATE_USER=?
+                    WHERE ID=?
+                ]]>
+            </value>
+        </property>
+        <property name="qryTodo">
+            <bean
+                class="com.comunidad.simplecatproducto.jdbc.JdbcQueryParameters">
+                <property name="sqlBase">
+                    <value>
+                        <![CDATA[	
+                            SELECT
+                            ID, ID_PROD, NOMBRE, DESCR, FOTO, PATH, STATUS_FLAG,
+                            EXPIRY_DT, LAST_UPDATE_DT, LAST_UPDATE_USER
+                            FROM CAT_PROD.CATSUBPROD
+                            WHERE 1 = 1
+                        ]]>
+                    </value>
+                </property>
+                <property name="optionalParameters">
+                    <props>
+                        <prop key="id">AND ID=?</prop>
+                        <prop key="idProd">AND ID_PROD=?</prop>
+                        <prop key="estatus">AND STATUS_FLAG=?</prop>
+                    </props>
+                </property>
+                <property name="sqlLast">
+                    <value>
+                    </value>
+                </property>
+            </bean>
+        </property>
+        <property name="nextId">
+            <value>
+                <![CDATA[
+                    SELECT MAX(ID) + 1 FROM CAT_PROD.CATSUBPROD
+                ]]>
+            </value>
+        </property>
+        <property name="qryCatSubprod">
+            <value>
+                <![CDATA[
+                    SELECT ID, NOMBRE FROM CAT_PROD.CATSUBPROD ORDER BY ID ASC
+                ]]>
+            </value>
+        </property>
+    </bean>
+</beans>
