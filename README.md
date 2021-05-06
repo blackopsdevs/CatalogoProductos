@@ -50,7 +50,7 @@ _El proyecto esta contruido con las siguientes herramientas:_
 
 ## Autores ✒️
 
-_Autores del proyecto: _
+_Autores del proyecto:_
 
 * **blackopsdevs** - *Trabajo Inicial* - [blackopsdevs](https://github.com/blackopsdevs)
 * **HARO Labs** - *Patrocinador - Initial commit* - [HARO Labs]
@@ -63,9 +63,9 @@ Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md
 
 ## Contacto 📄
 
-blackopsdevs email - blackopsdevs.mx@gmail.com
-blackopsdevs github - https://github.com/blackopsdevs/CatalogoProductos
-blackopsdevs instagram - santosdevs1
+* **blackopsdevs** email - [blackopsdevs.mx@gmail.com](https://mail.google.com/)
+* **blackopsdevs** github - [github](https://github.com/blackopsdevs/CatalogoProductos)
+* **blackopsdevs** instagram - [santosdevs1](https://www.instagram.com/)
 
 ---
 ⌨️ con ❤️ por [blackopsdevs](https://github.com/blackopsdevs) 😊 y HARO Labs.
